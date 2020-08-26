@@ -13,14 +13,20 @@ jobs:
     runs-on: windows-latest   
     
     steps:
-    #- name: Install 2017 Build Tools
-    #  run: choco install visualstudio2017buildtools --version 15.9.25.0 -y
-     
+    - name: Add vs2017 Build Tools
+      run: choco install visualstudio2017buildtools
+      
+    - name: Add vs2017 Extension Tools
+      run: choco install visualstudio2017-workload-visualstudioextensionbuildtools
+      
+    #- name: Add vs2019 Extensions Tools
+    #  run: choco install visualstudio2019-workload-visualstudioextension
+      
     # Configure MSBuild ...
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.1
-      #with:
-      #  vs-version: '15.9.25.0' # '[15.0,15.8)'
+      with:
+        vs-version: '[15.8,15.10)' # '15.9.25.0'
 
     # Setup DotNet Core
     - uses: actions/setup-dotnet@v1
